@@ -1,0 +1,468 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Source Code Pro', monospace; /* Coding-style font */
+    box-sizing: border-box;  
+}
+html{
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #000000; /* Dark background for a sleek look */
+    color: #fff; /* White text for contrast */
+}
+
+#header {
+    width: 100%;
+    height: 100vh;
+    background-size: cover;
+    background-color: #000000;
+    background-position: center;
+}
+
+.container {
+    padding: 10px 10%;
+    position: relative;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.logo {
+    margin: 28px 20px;
+    width: 80px;
+    border-radius: 50%;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline-block;
+    margin: 10px 20px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 20px;
+    position: relative;
+}
+
+nav ul li a::after {
+    content: '';
+    width: 0;
+    height: 3px;
+    background: #d70000; 
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    transition: width 0.3s;
+}
+
+nav ul li a:hover::after {
+    width: 100%;
+}
+
+
+#photo-area {
+    position: absolute;
+    right: 0; /* Keep the photo on the right */
+    top: 0;
+    width: 50%; 
+    height: 60vh;
+    background-image: url('images/mpnew.jpg');
+    background-size: contain;
+    background-position: right center;
+    background-repeat: no-repeat;
+    margin-top: 8%;
+    margin-right: 110px;
+}
+
+.header-text {
+    margin-top: 15%;
+}
+
+.header-text h1 {
+    font-size: 2.5em; /* Larger font for main greeting */
+}
+
+.header-text h2 {
+    font-size: 1.5em;
+}
+
+.header-text p {
+    font-size: 1em;
+    margin-top: 20px;
+}
+
+.cursor {
+    display: inline-block;
+    width: 10px;
+    background-color: #fff;
+    margin-left: 5px;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+}
+#typed-text{
+    color: #d70000;
+}
+
+
+/* <!-- ------------ about ----------------- --> */
+#about{
+    padding: 80px 0px;
+    color: #fff;
+}
+
+.row{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.about-col-1 img{
+    width: 100%;
+    /* border-radius: 20%; */
+}
+.about-col-1 
+{
+    flex-basis: 40%;
+}
+
+.about-col-2
+{
+    flex-basis: 50%;
+}
+.sub-title{
+    font-size: 60px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.tab-titles{
+    display: flex;
+    margin: 20px 0 40px;
+}
+.tab-links{
+    margin:50px;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    position:relative;
+}
+.tab-links::after{
+    content:'';
+    width: 0;
+    height: 3px;
+    background-color: #d70000;
+    position: absolute;
+    left: 0;
+    bottom:-8px;
+    transition: 0.5s;
+}
+.tab-links.active-link::after{
+    width: 100%;
+} 
+
+.tab-contents ul li{
+    list-style: none;
+    margin: 10px 0;
+}
+.tab-contents ul li span{
+    font-size: 14px;
+    color: #bc3434;
+}
+
+.tab-contents{
+    display: none;
+}
+
+.tab-contents.active-tab{
+    display: block;
+}
+
+/* -------------------services-------------------------------------------------- */
+
+#services{
+    padding:30px 0;
+}
+.services-list{
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+    grid-gap:40px;
+    margin-top:50px;
+}
+.services-list div{
+    background: #262626;
+    padding: 40px;
+    font-size: 13px;
+    font-weight: 300;
+    border-radius: 20%;
+    transition: background 0.5s, transform 0.5s;
+}
+.services-list div i{
+    font-size: 50px;
+    margin-bottom: 30px;
+}
+.services-list div h2{
+    font-size: 30px;
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+.services-list div a{
+    text-decoration: none;
+    color:#ff9100;
+    font-size: 12px;
+    margin-top: 20px;
+    display: inline-block;
+}
+
+.services-list div:hover{
+    background:#da5f5f54;
+    transform: translateY(-10px);
+}
+
+/* -------------------------------------portfolio------------------------ */
+.portfolio{
+    padding:50px 0;
+}
+.work-list{
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+    grid-gap:40px;
+    margin-top:50px;
+}
+.work{
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+}
+.work img{
+    width:100;
+    border-radius: 10px;
+    display: block;
+}
+/* -----------------------------------------------------Contact--------------------------------------------- */
+.contact-left{
+    flex-basis: 35%;
+}
+.contact-right{
+    flex-basis: 60%;
+}
+.contact-left p{
+    margin-top: 30px;
+}
+.contact-left p i{
+    color: #d70000;
+    margin-right: 15px;
+    font-size: 25px;
+}
+.social-icons{
+    margin-top: 30px;
+}
+.social-icons a{
+    text-decoration: none;
+    font-size: 30px;
+    margin-right: 15px;
+    color: #a0a0a0;
+    display: inline-block;
+    transition: tranform 0.5s;
+}
+.social-icons a:hover{
+    color:#bc3434;
+    transform: translateY(-5px);
+}
+
+.btn.btn2{
+    display:inline-block;
+    background:#1fbe54;
+    border-radius: 25%;
+    margin-top: 30px;
+    padding:10px 10px;
+}
+.contact-left a{
+    text-decoration:none ;
+}
+.contact-right form{
+    width: 100%;
+}
+form input,form textarea{
+    width: 100%;
+    border:0;
+    outline: none;
+    background: #afafaf;
+    padding: 15px;
+    margin: 15px 0;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 6px;
+}
+form btn2{
+    padding: 14px 60px;
+    font-size: 18px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+/* ------------------------------------------------CSS FOR SMALL SCREEN------------------------------- */
+@media only screen and (max-width:600px){ 
+
+        /* Hide the normal menu and show burger icon */
+        nav ul {
+            display: none; /* Hide the menu */
+        }
+    
+        /* Show burger icon */
+        .burger-menu {
+            display: block;
+            cursor: pointer;
+            font-size: 30px;
+            color: #fff;
+            margin-right: 20px;
+        }
+    
+        /* When burger is clicked, show the menu */
+        .burger-menu.active + ul {
+            display: block;
+            text-align: center;
+        }
+    
+        nav ul li {
+            display: block;
+            margin: 10px 0;
+        }
+    
+        /* For the header photo adjustment */
+        #photo-area {
+            position: relative;
+            width: 100%; 
+            height: 30vh; /* Adjust height for small screen */
+            margin: 0 auto;
+            background-position: center;
+        }
+    
+        /* Make header text responsive */
+        .header-text h1 {
+            font-size: 1.5em; /* Adjust text size */
+        }
+    
+        .header-text h2 {
+            font-size: 1.2em; /* Adjust text size */
+        }
+    
+        .header-text p {
+            font-size: 0.9em;
+        }
+    
+        body {
+            padding: 0;
+        }
+        
+        nav ul {
+            padding: 0;
+            text-align: center;
+        }
+    
+        nav ul li {
+            display: block;
+            margin: 15px 0;
+        }
+    
+        .logo {
+            margin: 10px auto;
+            width: 60px;
+        }
+    
+        #photo-area {
+            width: 100%;
+            height: 40vh;
+            margin-right: 0;
+        }
+    
+        .header-text h1 {
+            font-size: 1.8em; /* Reduce size for mobile */
+        }
+    
+        .header-text h2 {
+            font-size: 1.2em;
+        }
+    
+        .header-text p {
+            font-size: 0.9em;
+        }
+    
+        .sub-title {
+            font-size: 40px; /* Adjust sub-title size */
+        }
+    
+        .about-col-1, .about-col-2 {
+            flex-basis: 100%;
+            text-align: center;
+        }
+    
+        .about-col-1 img {
+            width: 70%;
+            margin: 20px auto;
+        }
+    
+        .tab-titles {
+            flex-direction: column;
+            text-align: center;
+        }
+    
+        .tab-links {
+            margin: 10px 0;
+        }
+    
+        .services-list {
+            grid-template-columns: 1fr; /* Stack services vertically */
+        }
+    
+        .work-list {
+            grid-template-columns: 1fr;
+        }
+    
+        .social-icons {
+            text-align: center;
+            margin-top: 20px;
+        }
+    
+        .contact-left, .contact-right {
+            flex-basis: 100%;
+            text-align: center;
+        }
+    
+        .contact-left p {
+            font-size: 16px;
+        }
+    
+        form input, form textarea {
+            padding: 12px;
+            font-size: 16px;
+        }
+    
+        .btn.btn2 {
+            padding: 10px 40px;
+            font-size: 16px;
+        }
+    }
+
+    #msg{
+        color: #1fbe54;
+        margin-top: 10px;
+        display: block;
+    }

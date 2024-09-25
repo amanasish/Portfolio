@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aman Asish Gupta</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/10edf445fa.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="header">
+        <div class="container">
+            <nav>
+                <img src="images/logo.jpg" class="logo">
+                <ul>
+                    <li><a href="#header">HOME</a></li>
+                    <li><a href="#about">ABOUT</a></li>
+                    <li><a href="#services">SERVICES</a></li>
+                    <li><a href="#portfolio">PORTFOLIO</a></li>
+                    <li><a href="#contact">CONTACT</a></li>
+                </ul>
+                <span class="burger-menu"><i class="fas fa-bars"></i></span> <!-- Burger icon here -->
+                <!-- <ul>
+                    <li><a href="#">HOME</a></li>
+                    <li><a href="#">SERVICES</a></li>
+                    <li><a href="#">PORTFOLIO</a></li>
+                    <li><a href="#">ABOUT</a></li>
+                    <li><a href="#">CONTACT</a></li>
+                </ul> -->
+            </nav> 
+            <div class="header-text">
+                <h1>Hello World! I'm <span id="typed-text"></span><span class="cursor">&nbsp;</span></h1>
+                <h2>Turning coffee into code, ideas into reality.</h2>
+                <p>Crafting the future of digital experiences — where art meets algorithm.</p>
+            </div>
+            <div id="photo-area"></div>
+        </div>
+    </div>
+
+<!-- ------------ about ----------------- -->
+    <div id="about">
+        <div class="container">
+            <div class="row">
+                <div class="about-col-1">
+                    <img src="images/tapepic.jpg">
+                </div>
+                <div class="about-col-2">
+                    <h1 CLASS="sub-title">About Me</h1>
+                    <p>Computer Science and Engineering graduate from Silicon Institute of Technology, Bhubaneswar. Specializing in MERN stack technologies, I have practical experience from internships and significant projects in both front-end and back-end development. My technical journey is complemented by my active participation in hackathons and a passion for robotics.</p>
+                    <div class="tab-titles">
+                        <p class="tab-links active-link" onclick="opentab('skills')">Skills</p>
+                        <p class="tab-links" onclick="opentab('experience')">Experience</p>
+                        <p class="tab-links" onclick="opentab('education')">Education</p>
+                    </div>
+
+                    <div class="tab-contents active-tab" id="skills">
+                        <ul>
+                            <li><span>Languages</span><br>C/C++ | JAVA | Python</li>
+                            <li><span>Web Technlogies</span><br>HTML | CSS | MERN | Advanced JAVA( JSP JDBC Servlets )</li>
+                            <li><span>Software & Tools/Databases</span><br>GitHub | VS Code | MySQL</li>
+                        </ul>
+                    </div>
+
+                    <div class="tab-contents" id="experience">
+                        <ul>
+                            <li><span>Syllogistek  Systems Private Ltd.  2022</span><br>Intern MERN STACK | gained hands-on experience in HTML, CSS, JavaScript, ExpressJS, NodeJS, MongoDB for frontend and backend development, including database integration.</li>
+                            <li><span>Rural Technology and Business Incubator  2021</span><br>Appentice | Entrepreneurship and Robotic Process Automation Program sponsored by Department of science and technology Government of India Org. by RTBI </li>
+                        </ul>
+                    </div>
+
+                    <div class="tab-contents" id="education">
+                        <ul>
+                            <li><span>Silicon Institute of Technology, Bhubaneswar  2024</span><br>Bachelor's of Technology(Computer Science and Engineering) - 9 .00 CGPA</li>
+                            <li><span>Central Academy Senior
+                                Secondary School, Kota 2019</span><br> Intermediate(PCM) - 82%</li>
+                            <li><span>D.A.V. Public School,
+                                Hazaribagh  2017</span><br>Matriculation - 93.1%</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- --------------------Services---------------------- -->
+<div id="services">
+    <div class="container">
+        <h1 class="sub-title">My Services</h1> 
+        <div class="services-list">
+            <div>
+                <i class="fa-solid fa-laptop-code"></i>
+                <h2>Web Development</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam explicabo harum reiciendis quia, ex, minima aliquid ipsum fuga temporibus voluptatibus ab? Quibusdam, aliquid. Pariatur nesciunt voluptas perspiciatis odio mollitia incidunt.</p>
+                <a href="#">Learn more</a>
+            </div>
+
+            <div>
+                <i class="fa-solid fa-backward"></i>
+                <h2>Backend</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam explicabo harum reiciendis quia, ex, minima aliquid ipsum fuga temporibus voluptatibus ab? Quibusdam, aliquid. Pariatur nesciunt voluptas perspiciatis odio mollitia incidunt.</p>
+                <a href="#">Learn more</a>
+            </div>
+
+            <div>
+                <i class="fa-brands fa-font-awesome"></i>
+                <h2>Database</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam explicabo harum reiciendis quia, ex, minima aliquid ipsum fuga temporibus voluptatibus ab? Quibusdam, aliquid. Pariatur nesciunt voluptas perspiciatis odio mollitia incidunt.</p>
+                <a href="#">Learn more</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- -----------------Portfolio---------------- -->
+<div id="portfolio">
+<div class="container">
+    <h1 class="sub-titles">My Work</h1>
+    <div class="work-list">
+        <div class="work">
+            <img src="images/matrix-356024.jpg">
+        </div>
+        <div class="work">
+            <img src="images/matrix-356024.jpg">
+        </div>
+        <div class="work">
+            <img src="images/matrix-356024.jpg">
+        </div>
+    </div>
+</div>
+</div>
+
+<!-- --------------------------Contact--------------- -->
+<div id="contact">
+    <div class="container">
+        <div class="row">
+            <div class="contact-left">
+                <h1 class="sub-title">Contact Me</h1>
+                <p><i class="fa-regular fa-paper-plane"></i>amanasisgupta@gmail.com</p>
+                <p><i class="fa-solid fa-phone"></i>6205888497</p>
+                <div class="social-icons">
+                    <a href="https://www.linkedin.com/in/aman-asish-gupta-085b57215?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href=""><a href="amanasisgupta@gmail.com"><i class="fa-solid fa-envelope"></i></i></a></a>
+                    <a href=""><a href=""><i class="fa-brands fa-twitter"></i></a></a>
+                    <a href=""><a href="https://github.com/amanasish"><i class="fa-brands fa-github"></i></a></a>
+                </div>
+                <a href="images/Aman Asish Gupta-Resume.jpg" download class="btn btn2">Download CV</a>
+            </div>
+            <div class="contact-right">
+                <form name="submit-to-google-sheet">
+                    <input type="text" name="Name" placeholder="Your Name" required>
+                    <input type="email" name="Email" placeholder="Your Email" required>
+                    <textarea name="Message" rows=""6 placeholder="Your Message"></textarea>
+                    <button type="submit" class="btn btn2">Submit</button>
+                </form>
+                <span id="msg"></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+<script src="script.js"></script>
+
+</body>
+</html>
