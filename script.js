@@ -1,5 +1,5 @@
 
-const text = "Aman Asish Gupta"; // The text to type
+const text = "Aman :)"; // The text to type
 const typingSpeed = 150; // Typing speed in milliseconds
 var tablinks = document.getElementsByClassName("tab-links")
 var tabcontents = document.getElementsByClassName("tab-contents")
