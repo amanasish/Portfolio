@@ -1,5 +1,5 @@
 
-const text = "Aman Asish Gupta"; // The text to type
+const text = "Aman :)"; // The text to type
 const typingSpeed = 150; // Typing speed in milliseconds
 var tablinks = document.getElementsByClassName("tab-links")
 var tabcontents = document.getElementsByClassName("tab-contents")
@@ -53,7 +53,7 @@ form.addEventListener('submit', e => {
         msg.innerHTML = "Form submitted successfully !"
         setTimeout(function(){
             msg.innerHTML = ""
-        },5000)
+        },1000)
         form.reset()
     })
     .catch(error => console.error('Error!', error.message))
