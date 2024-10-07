@@ -41,6 +41,20 @@ nav {
     border-radius: 50%;
 }
 
+.burger-menu i{
+    text-decoration: none;
+    font-size: 30px;
+    margin-right: 15px;
+    color: #a0a0a0;
+    display: inline-block;
+    transition: tranform 0.5s;
+}
+
+.burger-menu i:hover{
+    color:#bc3434;
+    transform: translateY(-5px);
+}
+
 nav ul {
     list-style: none;
     padding: 0;
