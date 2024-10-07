@@ -475,8 +475,11 @@ form btn2{
         }
     }
 
+
+
     #msg{
+        
         color: #1fbe54;
-        margin-top: 10px;
+        margin-top: 5px;
         display: block;
     }

@@ -50,7 +50,7 @@ form.addEventListener('submit', e => {
     e.preventDefault()
     fetch(scriptURL, { method: 'POST', body: new FormData(form)})
     .then(response => {
-        msg.innerHTML = "Form submitted successfully"
+        msg.innerHTML = "Form submitted successfully !"
         setTimeout(function(){
             msg.innerHTML = ""
         },5000)
