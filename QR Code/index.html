@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" href="data:;base64,=">
+	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="corner.css">
+	<title>QR Code Generator</title>
+</head>
+<body>
+<h1>QR Code Generator</h1>
+<!-- div for top left corner -->
+<div class="version">
+	<div class="demo version-section"><a href="https://github.com/amanasish/QR-Code" class="github-corner">
+		<svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; left: 0; transform: scale(-1, 1);">
+		<path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+		<path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+		<path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path>
+		</svg></a>
+	</div>
+</div>
+
+<ul>
+  <li>Generate a QR Code for your input.</li>
+  <li>Open source repository: <a href="https://github.com/amanasish">https://github.com/amanasish</a></li>
+</ul>
+	
+<div class="controls">
+	<label>Error correction level:
+		<select id="ecl">
+			<option value="L+" selected>Low, or better for same size (~7%+)</option>
+			<option value="M+">Medium, or better for same size (~15%+)</option>
+			<option value="Q+">Quartile, or better for same size (~25%+)</option>
+			<option value="H">High (~30%)</option>
+			<option value="Q">Quartile (~25%)</option>
+			<option value="M">Medium (~15%)</option>
+			<option value="L">Low (~7%)</option>
+		</select>
+	</label>
+	(increases complexity, but more robust to damage or occlusion).
+</div>
+
+<div class="controls">
+	<label>Text: <input type="text" id="text" placeholder="https://example.com"></label>
+</div>
+
+<details>
+<summary>Text</summary>
+<div id="output_text">
+-
+</div>
+</details>
+
+<details open>
+<summary>Image &lt;img&gt;</summary>
+<div id="output_img">
+  <img src="" alt="">
+</div>
+</details>
+
+<details>
+<summary>Image &lt;svg&gt;</summary>
+<div id="output_svg">
+<svg></svg>
+</div>
+</details>
+
+<ul>
+  <li>Simpler codes are easier to scan:
+	<ul>
+		<li>Keep the input as short as possible.</li>
+		<li>If using a URL with a common top-level-domain (such as <code>.com</code>), some readers work without an initial <code>http://</code> or <code>https://</code>, but probably best not to rely on this.</li>
+		<li>All-numeric text is the most compact, but all upper-case alphanumeric (with some symbols allowed) is more compat than mixed-case.</li>
+		<li>Do not use upper case for the URL past the domain name without first checking the server responds correctly.</li>
+	</ul>
+  </li>
+  <li>Include a written alternative for the URL.</li>
+  <li>For WiFi QR codes, use the format: <code>WIFI:S:my_ssid;T:WPA;P:my_passphrase;;</code></li>
+</ul>
+
+<script type="module">
+import QrCode from './qrcode.mjs';
+
+function renderHtml(matrix) {
+	// '▀', '▄', '█' // '\u{0020}' space, '\u{2580}' upper half block, '\u{2584}' lower half block, '\u{2588}' block
+	// Figure space: '\u{2007}'
+	const renderOptions = {
+		segments: ['<span>&nbsp;</span>', '<span>▀</span>', '<span>▄</span>', '<span>█</span>'],
+		sep: '<br>',
+	};
+	return QrCode.render('medium', matrix, renderOptions);
+}
+
+function focus() {
+	document.querySelector('#text').select();
+}
+
+function change() {
+	const input = document.querySelector('#text').value;
+	let text;
+	let svg;
+	try {
+		const ecl = document.querySelector('#ecl').value;
+		const qrOptions = {
+			errorCorrectionLevel: QrCode.ErrorCorrectionLevel[ecl[0]],
+			optimizeEcc: ecl.includes('+'),
+		};
+		const matrix = QrCode.generate(input, qrOptions);
+		text = renderHtml(matrix);
+		const renderOptions = {
+		};
+		svg = QrCode.render('svg', matrix, renderOptions);
+	} catch (e) {
+		text = 'Error: ' + e;
+	}
+	const textElement = document.querySelector('#output_text');
+	const imgElement = document.querySelector('#output_img img');
+	const svgElement = document.querySelector('#output_svg svg');
+	textElement.innerHTML = text;
+	imgElement.src = 'data:image/svg+xml,' + encodeURIComponent(svg);
+	imgElement.alt = input;
+	svgElement.alt = input;
+	if (svg) {
+		svgElement.outerHTML = svg;
+	} else {
+		svgElement.innerHTML = svg;
+	}
+}
+
+function copyMultiLinePlainTextToClipboard(text) {
+	const temp = document.createElement('textarea');
+	temp.value = text;
+	document.body.appendChild(temp);
+	temp.select();
+	document.execCommand('copy');
+	document.body.removeChild(temp);
+}
+
+function safeFilename(text) {
+	return text.replaceAll(/[^a-zA-Z0-9_-]/g, '_').toLowerCase();
+}
+
+async function dataUriToBlob(dataUri) {
+	try {
+		return await (await fetch(dataUri)).blob();
+	} catch (e) {
+		const protocolParts = dataUri.split(':');
+		if (protocolParts[0] != 'data') throw new Error('Invalid data URI');
+		const nonProtocol = protocolParts.slice(1).join(':');
+		const dataParts = nonProtocol.split(',');
+		const metaParts = dataParts[0].split(';');
+		const type = metaParts[0];
+		const encoding = metaParts[1];
+		const rawData = dataParts.slice(1).join('');
+        const data = encoding == 'base64' ? atob(rawData) : decodeURIComponent(rawData);
+		const bytes = [];
+        for (let i = 0; i < binary.length; i++) bytes.push(data.charCodeAt(i));
+        return new Blob([new Uint8Array(bytes)], { type });
+	}
+}
+
+async function rasterizeImageToBlob(src, type = 'image/png') {
+	const img = new Image();
+  	const ctx = document.createElement('CANVAS').getContext('2d');
+	img.crossOrigin = '';
+	img.src = src;
+	return new Promise(resolve => {
+		img.onload = () => {
+			ctx.canvas.width = img.naturalWidth;
+			ctx.canvas.height = img.naturalHeight;
+			ctx.drawImage(img, 0, 0);
+			ctx.canvas.toBlob((blob) => resolve(blob), type);
+		};
+	});
+}
+
+function svgToBlob(svg, type = 'image/svg+xml') {
+	return new Blob([svg], { type });
+}
+
+function copyBlobToClipboard(blob) {
+  const itemSrc = {};
+  itemSrc[blob.type] = blob; 
+  const item = new ClipboardItem(itemSrc);
+  return navigator.clipboard.write([item]);
+}
+
+function downloadBlob(blob, filename = null, type = null) { // 'application/octet-stream'
+	if (!(blob instanceof Blob)) { blob = new Blob([blob], type ? { type } : undefined); }
+	const elem = window.document.createElement('A');
+	elem.href = window.URL.createObjectURL(blob);
+	if (filename) elem.download = filename;
+	if (type) elem.type = type;
+	document.body.appendChild(elem);
+	elem.click();
+	document.body.removeChild(elem);
+}
+
+async function copySvgToClipboard(svg, imgSrc, element) {
+	// Try to copy the SVG as an image to the clipboard
+	try {
+		if ('write' in navigator.clipboard && navigator.permissions) {
+			const permissionResult = await navigator.permissions.query({ name: 'clipboard-write' });
+			if (permissionResult.state === 'granted') {
+				const svgBlob = svgToBlob(svg);
+				const pngBlob = await rasterizeImageToBlob(imgSrc);
+				const htmlBlob = svgToBlob(svg, 'text/html');
+				const textBlob = svgToBlob(svg, 'text/plain');
+
+console.log('COPY: clipboard.write(ClipboardItem) -- SVG')
+				try {
+					const item = new ClipboardItem({
+						'image/svg+xml': svgBlob,
+						//'image/png': pngBlob,
+						//'text/html': htmlBlob,
+						//'text/plain': textBlob,
+					});
+					await navigator.clipboard.write([item]);
+					return true;
+				} catch (e) {
+					console.error(e.name, e.message);
+				}
+
+console.log('COPY: clipboard.write(ClipboardItem) -- PNG')
+				try {
+					const item = new ClipboardItem({
+						//'image/svg+xml': svgBlob,
+						'image/png': pngBlob,
+						//'text/html': htmlBlob,
+						//'text/plain': textBlob,
+					});
+					await navigator.clipboard.write([item]);
+					return true;
+				} catch (e) {
+					console.error(e.name, e.message);
+				}
+
+				console.log('COPY: clipboard.write(ClipboardItem) -- HTML')
+				try {
+					const item = new ClipboardItem({
+						//'image/svg+xml': svgBlob,
+						//'image/png': pngBlob,
+						'text/html': htmlBlob,
+						'text/plain': textBlob,
+					});
+					await navigator.clipboard.write([item]);
+					return true;
+				} catch (e) {
+					console.error(e.name, e.message);
+				}
+
+			}
+		}
+	} catch (e) {
+		console.error(e.name, e.message);
+	}
+
+	try {
+		// Fallback: this tries to copy the selected range around the image as HTML
+console.log('COPY: execCommand(copy) range')
+		window.getSelection().removeAllRanges();
+		const range = document.createRange();
+		range.selectNode(element);
+		window.getSelection().addRange(range);
+		document.execCommand('copy');
+		window.getSelection().removeAllRanges();
+		return true;
+	} catch (e) {
+		console.error(e.name, e.message);
+	}
+
+	// Fall back to copying source
+	try {
+console.log('COPY: writeText source')
+		await navigator.clipboard.writeText(svg);
+		return true;
+	} catch (e) {
+		console.error(e.name, e.message);
+	}
+
+	return false;
+}
+
+function click_text() {
+	const text = document.querySelector('#output_text').innerText;
+	copyMultiLinePlainTextToClipboard(text);
+	document.querySelector('#text').focus();
+}
+
+async function click_img() {
+	const element = document.querySelector('#output_img img');
+	const svg = decodeURIComponent(element.src.split(',').slice(1).join(''));
+	//const imgSrc = element.src;
+	//copySvgToClipboard(svg, imgSrc, element);
+	downloadBlob(svgToBlob(svg), safeFilename(element.alt) + '.svg');
+}
+
+function click_svg() {
+	const element = document.querySelector('#output_svg svg');
+	const svg = element.outerHTML;
+	//const imgSrc = 'data:image/svg+xml,' + encodeURIComponent(svg);
+	//copySvgToClipboard(svg, imgSrc, element);
+	downloadBlob(svgToBlob(svg), safeFilename(document.querySelector('#text').value) + '.svg');
+}
+
+function start() {
+	document.querySelector('#text').addEventListener('focus', focus);
+	document.querySelector('#text').addEventListener('input', change);
+	document.querySelector('#ecl').addEventListener('change', change);
+	document.querySelector('#output_text').addEventListener('click', click_text);
+	document.querySelector('#output_img img').addEventListener('click', click_img);
+	document.querySelector('#output_svg').addEventListener('click', click_svg);
+	document.querySelector('#text').focus();
+	change();
+}
+
+window.addEventListener('DOMContentLoaded', start);
+
+</script>
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3>About Me</h3>
+            <p>Software developer passionate about creating innovative solutions.</p>
+        </div>
+        <div class="footer-section">
+            <h3>Connect</h3>
+            <ul class="social-links">
+                <li><a href="https://github.com/amanasish" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                <li><a href="https://in.linkedin.com/in/aman-asish-gupta-085b57215" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+                <li><a href="amanasisgupta@gmail.com">Email</a></li>
+            </ul>
+        </div>
+    </div>
+	<div class="dark-mode-toggle">
+		<label for="dark-mode"></label>
+		<input type="checkbox" id="dark-mode">
+	</div>
+	
+	<script>
+		const toggleSwitch = document.querySelector('#dark-mode');
+		const currentTheme = localStorage.getItem('theme');
+		
+		if (currentTheme) {
+			document.documentElement.setAttribute('data-theme', currentTheme);
+			if (currentTheme === 'dark') {
+				toggleSwitch.checked = true;
+			}
+		}
+		
+		toggleSwitch.addEventListener('change', function(e) {
+			if (e.target.checked) {
+				document.documentElement.setAttribute('data-theme', 'dark');
+				localStorage.setItem('theme', 'dark');
+			} else {
+				document.documentElement.setAttribute('data-theme', 'light');
+				localStorage.setItem('theme', 'light');
+			}
+		});
+	</script>
+	
+    <div class="copyright">
+        <p>&copy; 2024 Aman Asish Gupta. All rights reserved.</p>
+    </div>
+</footer>
+</body>
+</html>
