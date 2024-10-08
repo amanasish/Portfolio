@@ -1,9 +1,68 @@
 const typingSpeed = 130; // Typing speed in milliseconds
-const text = "Aman Asish Gupta"; // The text to type
+// const text = "Aman Asish Gupta"; // The text to type
 var tablinks = document.getElementsByClassName("tab-links")
 var tabcontents = document.getElementsByClassName("tab-contents")
 
 let i = 0;
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    if (window.gsap) {
+        gsap.registerPlugin(TextPlugin);
+        
+        const tl = gsap.timeline();
+        
+        // Set initial states
+        gsap.set('nav ul li', { opacity: 0, y: -20 });
+        gsap.set('.header-text', { opacity: 0 });
+        gsap.set('#photo-area', { opacity: 0 });
+        
+        // Faster menu animations
+        tl.to('nav ul li', {
+            opacity: 1,
+            y: 0,
+            duration: 0.35,
+            stagger: 0.1,
+            ease: "power2.out"
+        });
+
+        // Faster header text animation
+        tl.to('.header-text', {
+            opacity: 1,
+            duration: 0.5,
+            ease: "power2.out"
+        });
+
+        // Faster typing effect
+        tl.to('#typed-text', {
+            duration: 1,
+            text: "Aman Asish Gupta",
+            ease: "none"
+        });
+
+        // Faster photo fade in
+        tl.to('#photo-area', {
+            opacity: 1,
+            duration: 0.4,
+            ease: "power2.out"
+        }, "-=0.5");
+    }
+});
+
+// Tab functionality
+function opentab(tabname) {
+    var tablinks = document.getElementsByClassName("tab-links");
+    var tabcontents = document.getElementsByClassName("tab-contents");
+    
+    for(let tablink of tablinks) {
+        tablink.classList.remove("active-link");
+    }
+    for(let tabcontent of tabcontents) {
+        tabcontent.classList.remove("active-tab");
+    }
+    event.currentTarget.classList.add("active-link");
+    document.getElementById(tabname).classList.add("active-tab");
+}
 
 
 function opentab(tabname){

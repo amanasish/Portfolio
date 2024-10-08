@@ -1,5 +1,119 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400;600&display=swap');
 
+
+
+
+
+/* Animation styles */
+nav ul li {
+    opacity: 0;
+    transform: translateY(-50px);
+}
+
+.header-text {
+    opacity: 0;
+}
+
+#photo-area {
+    opacity: 0;
+}
+
+.cursor {
+    display: inline-block;
+    width: 3px;
+    height: 20px;
+    background-color: #fff;
+    margin-left: 5px;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+/* Ensure elements are visible on mobile */
+@media only screen and (max-width: 600px) {
+    nav ul li, .header-text, #photo-area {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 * {
     margin: 0;
     padding: 0;
@@ -119,12 +233,22 @@ nav ul li a:hover::after {
     margin-top: 20px;
 }
 
-.cursor {
+/* .cursor {
     display: inline-block;
     width: 10px;
     background-color: #fff;
     margin-left: 5px;
     animation: blink 1s infinite;
+} */
+
+
+.cursor {
+    display: inline-block;
+    width: 2px;
+    height: 1em;
+    background-color: #d70000;
+    margin-left: 2px;
+    animation: blink 0.7s infinite;
 }
 
 @keyframes blink {
