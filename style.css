@@ -260,16 +260,56 @@ nav ul li a:hover::after {
     grid-gap:40px;
     margin-top:50px;
 }
-.work{
+/* .work{
     border-radius: 10px;
     position: relative;
     overflow: hidden;
 }
 .work img{
-    width:100;
+    width: 100px;;
     border-radius: 10px;
-    display: block;
+    display: flex;
+} */
+.work1 img{
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+    width: 230px;;
+    border-radius: 10px;
+    display: flex;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
+.work2 img{
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+    width: 230px;
+    height: 290px;
+    border-radius: 10px;
+    display: flex;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.work3 img{
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+    height: 290px;
+    width: 250px;;
+    border-radius: 10px;
+    display: flex;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.work1 a:hover img,
+.work2 a:hover img,
+.work3 a:hover img {
+    transform: scale(1.05); /* Slightly enlarge on hover */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Add shadow effect */
+}
+
+
 /* -----------------------------------------------------Contact--------------------------------------------- */
 .contact-left{
     flex-basis: 35%;
