@@ -1,11 +1,5 @@
-
-<<<<<<< HEAD
-const text = "Aman :)"; // The text to type
 const typingSpeed = 130; // Typing speed in milliseconds
-=======
 const text = "Aman Asish Gupta"; // The text to type
-const typingSpeed = 150; // Typing speed in milliseconds
->>>>>>> cf25960e9a130986572a64b34091f90949591045
 var tablinks = document.getElementsByClassName("tab-links")
 var tabcontents = document.getElementsByClassName("tab-contents")
 
