@@ -47,6 +47,28 @@ document.addEventListener('DOMContentLoaded', function() {
             ease: "power2.out"
         }, "-=0.5");
 
+        // Swapping Cards Logic
+        const cards = document.querySelectorAll('.swap-card');
+        if (cards.length > 0) {
+            let currentIndex = 0;
+            
+            setInterval(() => {
+                currentIndex = (currentIndex + 1) % cards.length;
+                
+                cards.forEach((card, i) => {
+                    card.classList.remove('active', 'next', 'prev');
+                    
+                    if (i === currentIndex) {
+                        card.classList.add('active');
+                    } else if (i === (currentIndex + 1) % cards.length) {
+                        card.classList.add('next');
+                    } else {
+                        card.classList.add('prev');
+                    }
+                });
+            }, 3000);
+        }
+
         // Scroll Animations for sections
         const sections = ['#about', '#services', '#portfolio', '#contact'];
         sections.forEach(section => {
