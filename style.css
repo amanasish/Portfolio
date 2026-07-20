@@ -231,23 +231,25 @@ nav ul li a:hover::after {
 }
 
 .header-text h1 {
-    font-size: 2.5em; /* Larger font for main greeting */
+    font-size: 2.1em; /* Lowered font for main greeting */
 }
 
 .header-text h2 {
-    font-size: 1.5em;
+    font-size: 1.3em;
+    color: #ccc;
 }
 
 .header-text p {
-    font-size: 1em;
+    font-size: 0.95em;
     margin-top: 20px;
+    color: #aaa;
 }
 
 .swap-cards-container {
     position: relative;
     width: 100%;
-    max-width: 400px;
-    height: 180px;
+    max-width: 480px; /* Made cards little bigger */
+    height: 230px;    /* Made cards little bigger */
     margin-top: 40px;
     perspective: 1000px;
 }
@@ -451,62 +453,86 @@ nav ul li a:hover::after {
 }
 
 /* -------------------------------------portfolio------------------------ */
-.portfolio{
-    padding:50px 0;
+#portfolio {
+    padding: 80px 0;
 }
-.work-list{
+.work-list {
     display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
-    grid-gap:40px;
-    margin-top:50px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-gap: 40px;
+    margin-top: 50px;
 }
-/* .work{
-    border-radius: 10px;
+.work-card {
+    border-radius: 12px;
     position: relative;
     overflow: hidden;
+    height: 380px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
-.work img{
-    width: 100px;;
-    border-radius: 10px;
-    display: flex;
-} */
-.work1 img{
-    border-radius: 10px;
-    position: relative;
+.work-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+.work-layer {
+    width: 100%;
+    height: 0;
+    background: linear-gradient(rgba(0,0,0,0.5), #d70000 95%);
+    border-radius: 12px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
     overflow: hidden;
-    width: 230px;;
-    border-radius: 10px;
     display: flex;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 30px;
+    text-align: center;
+    transition: height 0.4s ease;
+    box-sizing: border-box;
 }
-
-.work2 img{
-    border-radius: 10px;
-    position: relative;
-    overflow: hidden;
-    width: 230px;
-    height: 290px;
-    border-radius: 10px;
-    display: flex;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+.work-layer h3 {
+    font-weight: 600;
+    margin-bottom: 12px;
+    font-size: 20px;
+    color: #fff;
 }
-
-.work3 img{
-    border-radius: 10px;
-    position: relative;
-    overflow: hidden;
-    height: 290px;
-    width: 250px;;
-    border-radius: 10px;
-    display: flex;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+.work-layer p {
+    font-size: 13px;
+    color: #eee;
+    line-height: 1.5;
 }
-
-.work1 a:hover img,
-.work2 a:hover img,
-.work3 a:hover img {
-    transform: scale(1.05); /* Slightly enlarge on hover */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Add shadow effect */
+.work-layer a {
+    margin-top: 20px;
+    color: #000;
+    text-decoration: none;
+    font-size: 14px;
+    background: #fff;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.3s, color 0.3s, transform 0.3s;
+}
+.work-layer a i {
+    font-size: 14px;
+}
+.work-layer a:hover {
+    background: #000;
+    color: #fff;
+    transform: scale(1.05);
+}
+.work-card:hover img {
+    transform: scale(1.1);
+}
+.work-card:hover .work-layer {
+    height: 100%;
 }
 
 
