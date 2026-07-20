@@ -34,10 +34,10 @@ nav ul li {
 }
 
 /* Ensure elements are visible on mobile */
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 768px) {
     nav ul li, .header-text, #photo-area {
-        opacity: 1;
-        transform: none;
+        opacity: 1 !important;
+        transform: none !important;
     }
 }
 
@@ -514,7 +514,11 @@ form btn2{
 }
 
 /* ------------------------------------------------CSS FOR SMALL SCREEN------------------------------- */
-@media only screen and (max-width:600px){ 
+@media only screen and (max-width:768px){ 
+
+        .container {
+            padding: 10px 5%;
+        }
 
         /* Hide the normal menu and show burger icon */
         nav ul {
