@@ -49,6 +49,27 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Swapping Cards Logic
         const cards = document.querySelectorAll('.swap-card');
+        const headerH2 = document.querySelector('.header-text h2');
+        const headerP = document.querySelector('.header-text p');
+        
+        const slidesData = [
+            {
+                name: "Aman Asish Gupta",
+                subtitle: "Turning coffee into code, ideas into reality.",
+                desc: "Crafting the future of digital experiences — where art meets algorithm."
+            },
+            {
+                name: "ElderNest Mobile App",
+                subtitle: "Elderly Care & Health Companion",
+                desc: "A Flutter application providing medical reminders, linking, and safety features for elderly care."
+            },
+            {
+                name: "Voice E-Commerce",
+                subtitle: "AI-Powered Hands-Free Shopping",
+                desc: "An AI-powered voice command e-commerce platform allowing hands-free shopping experiences."
+            }
+        ];
+
         if (cards.length > 0) {
             let currentIndex = 0;
             
@@ -66,7 +87,36 @@ document.addEventListener('DOMContentLoaded', function() {
                         card.classList.add('prev');
                     }
                 });
-            }, 3000);
+
+                // Update text content with premium transition
+                const slide = slidesData[currentIndex];
+                const textTimeline = gsap.timeline();
+                
+                textTimeline.to([headerH2, headerP], {
+                    opacity: 0,
+                    y: -10,
+                    duration: 0.3,
+                    ease: "power2.in",
+                    onComplete: () => {
+                        headerH2.textContent = slide.subtitle;
+                        headerP.textContent = slide.desc;
+                    }
+                });
+                
+                textTimeline.to('#typed-text', {
+                    duration: 0.8,
+                    text: slide.name,
+                    ease: "none"
+                });
+                
+                textTimeline.to([headerH2, headerP], {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.4,
+                    ease: "power2.out"
+                }, "-=0.2");
+
+            }, 5000);
         }
 
         // Scroll Animations for sections
@@ -101,28 +151,6 @@ function opentab(tabname) {
     event.currentTarget.classList.add("active-link");
     document.getElementById(tabname).classList.add("active-tab");
 }
-
-
-function opentab(tabname){
-    for(tablink of tablinks){
-        tablink.classList.remove("active-link");
-    }
-    for(tabcontent of tabcontents){
-        tabcontent.classList.remove("active-tab");
-    }
-    event.currentTarget.classList.add("active-link");
-    document.getElementById(tabname).classList.add("active-tab");
-}
-
-function typeWriter() {
-    if (i < text.length) {
-        document.getElementById("typed-text").innerHTML += text.charAt(i);
-        i++;
-        setTimeout(typeWriter, typingSpeed);
-        }
-    }
-// Trigger the typewriter effect when the document is loaded
-document.addEventListener("DOMContentLoaded", typeWriter);
 
 
 
