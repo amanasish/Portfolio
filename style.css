@@ -248,8 +248,8 @@ nav ul li a:hover::after {
 .swap-cards-container {
     position: relative;
     width: 100%;
-    max-width: 480px; /* Keep max-width balanced */
-    height: 450px;    /* Increased to match the floating photo on the right */
+    max-width: 540px; 
+    height: 330px;    /* Elongated rectangle that matches right photo width/height proportions */
     margin-top: 30px;
     perspective: 1000px;
 }
@@ -263,13 +263,20 @@ nav ul li a:hover::after {
     transition: transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1), opacity 0.6s ease;
     box-shadow: 0 10px 25px rgba(0,0,0,0.6);
     border: 1px solid rgba(215, 0, 0, 0.3);
+    background: #080808;
 }
 
 .swap-card img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    filter: brightness(0.6);
+    object-fit: contain; /* Fit the photo without cropping it */
+    background: #080808;
+    filter: brightness(0.4);
+    transition: filter 0.5s ease;
+}
+
+.swap-card.active img {
+    filter: brightness(0.95);
 }
 
 .card-info {

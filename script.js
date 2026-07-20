@@ -33,15 +33,19 @@ document.addEventListener('DOMContentLoaded', function() {
             ease: "power2.out"
         });
 
-        // Set initial header name
-        document.querySelector('#typed-text').textContent = "Aman Asish Gupta";
+        // Typing effect for the initial load
+        tl.to('#typed-text', {
+            duration: 1.2,
+            text: "Aman Asish Gupta",
+            ease: "none"
+        });
 
         // Faster photo fade in
         tl.to('#photo-area', {
             opacity: 1,
             duration: 0.4,
             ease: "power2.out"
-        }, "-=0.2");
+        }, "-=0.4");
 
         // Swapping Cards Logic
         const cards = document.querySelectorAll('.swap-card');
@@ -112,7 +116,7 @@ document.addEventListener('DOMContentLoaded', function() {
             };
 
             // Set initial state
-            typedTextSpan.textContent = projects[0].name;
+            typedTextSpan.textContent = "";
             headerH2.textContent = projects[0].subtitle;
             headerP.textContent = projects[0].desc;
 
@@ -162,28 +166,32 @@ document.addEventListener('DOMContentLoaded', function() {
                         }
                     });
 
-                    // Update text content with premium fade transitions
+                    // Update text content with premium fade & type transitions
                     const textTimeline = gsap.timeline();
-                    textTimeline.to([headerH1, headerH2, headerP], {
+                    textTimeline.to([headerH2, headerP], {
                         opacity: 0,
-                        y: -15,
-                        duration: 0.4,
+                        y: -10,
+                        duration: 0.35,
                         ease: "power2.inOut",
-                        stagger: 0.05,
                         onComplete: () => {
-                            typedTextSpan.textContent = nextProject.name;
+                            typedTextSpan.textContent = "";
                             headerH2.textContent = nextProject.subtitle;
                             headerP.textContent = nextProject.desc;
                         }
                     });
                     
-                    textTimeline.to([headerH1, headerH2, headerP], {
+                    textTimeline.to(typedTextSpan, {
+                        duration: 1.0,
+                        text: nextProject.name,
+                        ease: "none"
+                    });
+                    
+                    textTimeline.to([headerH2, headerP], {
                         opacity: 1,
                         y: 0,
-                        duration: 0.5,
-                        ease: "power2.out",
-                        stagger: 0.05
-                    });
+                        duration: 0.4,
+                        ease: "power2.out"
+                    }, "-=0.25");
                 }
             };
 
