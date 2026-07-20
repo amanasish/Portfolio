@@ -33,90 +33,162 @@ document.addEventListener('DOMContentLoaded', function() {
             ease: "power2.out"
         });
 
-        // Faster typing effect
-        tl.to('#typed-text', {
-            duration: 1,
-            text: "Aman Asish Gupta",
-            ease: "none"
-        });
+        // Set initial header name
+        document.querySelector('#typed-text').textContent = "Aman Asish Gupta";
 
         // Faster photo fade in
         tl.to('#photo-area', {
             opacity: 1,
             duration: 0.4,
             ease: "power2.out"
-        }, "-=0.5");
+        }, "-=0.2");
 
         // Swapping Cards Logic
         const cards = document.querySelectorAll('.swap-card');
+        const headerH1 = document.querySelector('.header-text h1');
+        const typedTextSpan = document.querySelector('#typed-text');
         const headerH2 = document.querySelector('.header-text h2');
         const headerP = document.querySelector('.header-text p');
-        
-        const slidesData = [
+
+        const projects = [
             {
                 name: "Aman Asish Gupta",
                 subtitle: "Turning coffee into code, ideas into reality.",
-                desc: "Crafting the future of digital experiences — where art meets algorithm."
+                desc: "Crafting the future of digital experiences — where art meets algorithm.",
+                images: ["images/mypicBlack.jpg"]
             },
             {
                 name: "ElderNest Mobile App",
                 subtitle: "Elderly Care & Health Companion",
-                desc: "A Flutter application providing medical reminders, linking, and safety features for elderly care."
+                desc: "A Flutter application providing medical reminders, linking, and safety features for elderly care.",
+                images: [
+                    "images/HomeSlides/Eldernest Login.png",
+                    "images/HomeSlides/E_Home.png",
+                    "images/HomeSlides/E_Linking.png",
+                    "images/HomeSlides/E_Medicine’s Reminder.png",
+                    "images/HomeSlides/E_Medicine’s Search.png",
+                    "images/HomeSlides/E_Register.png",
+                    "images/HomeSlides/E_Logout.png"
+                ]
             },
             {
                 name: "Voice E-Commerce",
                 subtitle: "AI-Powered Hands-Free Shopping",
-                desc: "An AI-powered voice command e-commerce platform allowing hands-free shopping experiences."
+                desc: "An AI-powered voice command e-commerce platform allowing hands-free shopping experiences.",
+                images: [
+                    "images/HomeSlides/v_HomeWihtoutSearched.png",
+                    "images/HomeSlides/v_Parsed.png",
+                    "images/HomeSlides/v_Parsed data.png",
+                    "images/HomeSlides/v_Results.png"
+                ]
+            },
+            {
+                name: "Tic-Tac-Toe",
+                subtitle: "Interactive Web Game",
+                desc: "An interactive, animated Tic Tac Toe game built using vanilla HTML, CSS, and JS.",
+                images: ["images/HomeSlides/Tic-Tac-Toe.png"]
+            },
+            {
+                name: "Tasks App (My Day)",
+                subtitle: "Productivity & Tasks Tracker",
+                desc: "A neat tasks management application to boost productivity with subtasks and progress tracking.",
+                images: ["images/HomeSlides/My Day.png"]
+            },
+            {
+                name: "QR Generator",
+                subtitle: "Instant QR Utility",
+                desc: "A simple and efficient utility to generate QR codes instantly for links and custom text.",
+                images: ["images/HomeSlides/QR Code .png"]
             }
         ];
 
         if (cards.length > 0) {
-            let currentIndex = 0;
-            
-            setInterval(() => {
-                currentIndex = (currentIndex + 1) % cards.length;
+            let projectIndex = 0;
+            let imageIndex = 0;
+            let cardCycleIndex = 0;
+
+            const getActiveCard = () => {
+                return document.querySelector('.swap-card.active');
+            };
+
+            // Set initial state
+            typedTextSpan.textContent = projects[0].name;
+            headerH2.textContent = projects[0].subtitle;
+            headerP.textContent = projects[0].desc;
+
+            const handleSlideshow = () => {
+                const currentProject = projects[projectIndex];
                 
-                cards.forEach((card, i) => {
-                    card.classList.remove('active', 'next', 'prev');
+                // If there are more images in current project, slide the images inside the active card
+                if (imageIndex < currentProject.images.length - 1) {
+                    imageIndex++;
+                    const activeCard = getActiveCard();
+                    const activeImg = activeCard.querySelector('img');
                     
-                    if (i === currentIndex) {
-                        card.classList.add('active');
-                    } else if (i === (currentIndex + 1) % cards.length) {
-                        card.classList.add('next');
-                    } else {
-                        card.classList.add('prev');
-                    }
-                });
+                    gsap.to(activeImg, {
+                        opacity: 0.1,
+                        duration: 0.3,
+                        ease: "power2.inOut",
+                        onComplete: () => {
+                            activeImg.src = currentProject.images[imageIndex];
+                            gsap.to(activeImg, { opacity: 1, duration: 0.3, ease: "power2.inOut" });
+                        }
+                    });
+                } else {
+                    // Transition to the next project
+                    projectIndex = (projectIndex + 1) % projects.length;
+                    imageIndex = 0;
+                    const nextProject = projects[projectIndex];
 
-                // Update text content with premium transition
-                const slide = slidesData[currentIndex];
-                const textTimeline = gsap.timeline();
-                
-                textTimeline.to([headerH2, headerP], {
-                    opacity: 0,
-                    y: -10,
-                    duration: 0.3,
-                    ease: "power2.in",
-                    onComplete: () => {
-                        headerH2.textContent = slide.subtitle;
-                        headerP.textContent = slide.desc;
-                    }
-                });
-                
-                textTimeline.to('#typed-text', {
-                    duration: 0.8,
-                    text: slide.name,
-                    ease: "none"
-                });
-                
-                textTimeline.to([headerH2, headerP], {
-                    opacity: 1,
-                    y: 0,
-                    duration: 0.4,
-                    ease: "power2.out"
-                }, "-=0.2");
+                    cardCycleIndex = (cardCycleIndex + 1) % cards.length;
+                    const nextActiveCardIndex = (cardCycleIndex) % cards.length;
+                    const nextNextCardIndex = (cardCycleIndex + 1) % cards.length;
+                    const prevCardIndex = (cardCycleIndex + 2) % cards.length;
 
-            }, 5000);
+                    // Set first image and text of the next project in the upcoming active card
+                    const upcomingCard = cards[nextActiveCardIndex];
+                    upcomingCard.querySelector('img').src = nextProject.images[0];
+                    upcomingCard.querySelector('h3').textContent = nextProject.name;
+
+                    // Apply card state rotation
+                    cards.forEach((card, idx) => {
+                        card.classList.remove('active', 'next', 'prev');
+                        if (idx === nextActiveCardIndex) {
+                            card.classList.add('active');
+                        } else if (idx === nextNextCardIndex) {
+                            card.classList.add('next');
+                        } else {
+                            card.classList.add('prev');
+                        }
+                    });
+
+                    // Update text content with premium fade transitions
+                    const textTimeline = gsap.timeline();
+                    textTimeline.to([headerH1, headerH2, headerP], {
+                        opacity: 0,
+                        y: -15,
+                        duration: 0.4,
+                        ease: "power2.inOut",
+                        stagger: 0.05,
+                        onComplete: () => {
+                            typedTextSpan.textContent = nextProject.name;
+                            headerH2.textContent = nextProject.subtitle;
+                            headerP.textContent = nextProject.desc;
+                        }
+                    });
+                    
+                    textTimeline.to([headerH1, headerH2, headerP], {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.5,
+                        ease: "power2.out",
+                        stagger: 0.05
+                    });
+                }
+            };
+
+            // Slide interval
+            setInterval(handleSlideshow, 4000);
         }
 
         // Scroll Animations for sections
