@@ -758,3 +758,54 @@ form btn2{
         margin-top: 5px;
         display: block;
     }
+
+/* --- Coding Pet Companion --- */
+.pixel-pet {
+    position: absolute;
+    bottom: -22px; /* Sitting beautifully on the bottom border/ledge */
+    right: 25px;
+    z-index: 100;
+    cursor: pointer;
+    pointer-events: auto;
+    transition: transform 0.3s ease;
+}
+
+.pixel-pet:hover {
+    transform: scale(1.1);
+}
+
+.meow-bubble {
+    position: absolute;
+    top: -26px;
+    left: 28px;
+    background: #d70000;
+    color: #fff;
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 10px;
+    opacity: 0;
+    transform: translateY(5px);
+    pointer-events: none;
+    transition: opacity 0.3s, transform 0.3s;
+    font-family: monospace;
+    font-weight: bold;
+    white-space: nowrap;
+    box-shadow: 0 4px 10px rgba(215, 0, 0, 0.3);
+}
+
+.meow-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 15px;
+    border-width: 4px 4px 0;
+    border-style: solid;
+    border-color: #d70000 transparent;
+    display: block;
+    width: 0;
+}
+
+.pixel-pet:hover .meow-bubble {
+    opacity: 1;
+    transform: translateY(0);
+}

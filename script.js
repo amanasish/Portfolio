@@ -197,6 +197,33 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Slide interval
             setInterval(handleSlideshow, 4000);
+
+            // --- Pet Cat Animations ---
+            // Wag tail
+            gsap.to('#cat-tail', {
+                rotation: 15,
+                transformOrigin: "bottom right",
+                repeat: -1,
+                yoyo: true,
+                duration: 1.5,
+                ease: "sine.inOut"
+            });
+
+            // Blink eyes
+            const blinkCat = () => {
+                gsap.timeline()
+                    .to(['#cat-eye-l', '#cat-eye-r', '#cat-pupil-l', '#cat-pupil-r'], { scaleY: 0.1, transformOrigin: "center", duration: 0.12 })
+                    .to(['#cat-eye-l', '#cat-eye-r', '#cat-pupil-l', '#cat-pupil-r'], { scaleY: 1, transformOrigin: "center", duration: 0.12 });
+            };
+            setInterval(blinkCat, 4000);
+
+            // Twitch ears on hover
+            const petContainer = document.querySelector('.pixel-pet');
+            if (petContainer) {
+                petContainer.addEventListener('mouseenter', () => {
+                    gsap.to(['#cat-ear-l', '#cat-ear-r'], { y: -2, duration: 0.08, yoyo: true, repeat: 3 });
+                });
+            }
         }
 
         // Scroll Animations for sections
