@@ -8,7 +8,7 @@ let i = 0;
 
 document.addEventListener('DOMContentLoaded', function() {
     if (window.gsap) {
-        gsap.registerPlugin(TextPlugin);
+        gsap.registerPlugin(TextPlugin, ScrollTrigger);
         
         const tl = gsap.timeline();
         
@@ -46,6 +46,22 @@ document.addEventListener('DOMContentLoaded', function() {
             duration: 0.4,
             ease: "power2.out"
         }, "-=0.5");
+
+        // Scroll Animations for sections
+        const sections = ['#about', '#services', '#portfolio', '#contact'];
+        sections.forEach(section => {
+            gsap.from(section, {
+                scrollTrigger: {
+                    trigger: section,
+                    start: "top 80%",
+                    toggleActions: "play none none none"
+                },
+                y: 50,
+                opacity: 0,
+                duration: 0.8,
+                ease: "power3.out"
+            });
+        });
     }
 });
 

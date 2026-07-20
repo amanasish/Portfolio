@@ -202,22 +202,32 @@ nav ul li a:hover::after {
 }
 
 
-#photo-area {
-    position: absolute;
-    right: 0; /* Keep the photo on the right */
-    top: 0;
-    width: 50%; 
-    height: 60vh;
-    background-image: url('images/mpnew.jpg');
-    background-size: contain;
-    background-position: right center;
-    background-repeat: no-repeat;
-    margin-top: 8%;
-    margin-right: 110px;
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10%;
+    min-height: 60vh;
 }
 
 .header-text {
-    margin-top: 15%;
+    flex-basis: 50%;
+}
+
+#photo-area {
+    flex-basis: 45%;
+    height: 60vh;
+    background-image: url('images/mpnew.jpg');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0px); }
 }
 
 .header-text h1 {
@@ -468,9 +478,16 @@ nav ul li a:hover::after {
 .btn.btn2{
     display:inline-block;
     background:#1fbe54;
-    border-radius: 25%;
+    border-radius: 6px;
     margin-top: 30px;
-    padding:10px 10px;
+    padding: 12px 30px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    color: #fff;
+    font-weight: 500;
+}
+.btn.btn2:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(31, 190, 84, 0.4);
 }
 .contact-left a{
     text-decoration:none ;
@@ -502,6 +519,9 @@ form btn2{
         /* Hide the normal menu and show burger icon */
         nav ul {
             display: none; /* Hide the menu */
+            padding: 0;
+            text-align: center;
+            width: 100%;
         }
     
         /* Show burger icon */
@@ -516,26 +536,41 @@ form btn2{
         /* When burger is clicked, show the menu */
         .burger-menu.active + ul {
             display: block;
-            text-align: center;
         }
     
         nav ul li {
             display: block;
-            margin: 10px 0;
+            margin: 15px 0;
+        }
+
+        .logo {
+            margin: 10px auto;
+            width: 60px;
+        }
+
+        .header-content {
+            flex-direction: column-reverse;
+            text-align: center;
+            margin-top: 5%;
+        }
+
+        .header-text {
+            flex-basis: 100%;
+            margin-top: 20px;
         }
     
         /* For the header photo adjustment */
         #photo-area {
-            position: relative;
+            flex-basis: 100%;
             width: 100%; 
-            height: 30vh; /* Adjust height for small screen */
+            height: 40vh; /* Adjust height for small screen */
             margin: 0 auto;
             background-position: center;
         }
     
         /* Make header text responsive */
         .header-text h1 {
-            font-size: 1.5em; /* Adjust text size */
+            font-size: 1.8em; /* Adjust text size */
         }
     
         .header-text h2 {
@@ -549,42 +584,10 @@ form btn2{
         body {
             padding: 0;
         }
-        
-        nav ul {
-            padding: 0;
-            text-align: center;
-        }
-    
-        nav ul li {
-            display: block;
-            margin: 15px 0;
-        }
-    
-        .logo {
-            margin: 10px auto;
-            width: 60px;
-        }
-    
-        #photo-area {
-            width: 100%;
-            height: 40vh;
-            margin-right: 0;
-        }
-    
-        .header-text h1 {
-            font-size: 1.8em; /* Reduce size for mobile */
-        }
-    
-        .header-text h2 {
-            font-size: 1.2em;
-        }
-    
-        .header-text p {
-            font-size: 0.9em;
-        }
     
         .sub-title {
             font-size: 40px; /* Adjust sub-title size */
+            text-align: center;
         }
     
         .about-col-1, .about-col-2 {
