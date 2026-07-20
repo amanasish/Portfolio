@@ -32,12 +32,6 @@ document.addEventListener('DOMContentLoaded', function() {
             ease: "power2.out"
         });
 
-        // Typing effect for the initial load
-        tl.to('#typed-text', {
-            duration: 1.2,
-            text: "Aman Asish Gupta",
-            ease: "none"
-        });
 
         // Faster photo fade in
         tl.to('#photo-area', {
